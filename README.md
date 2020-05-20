@@ -23,7 +23,7 @@ This project integrates Prometheus and Grafana to monitor the Kafka status.
 
 4. Add the data source "Prometheus" to Grafana<br>
     ![](https://i.imgur.com/SDxzD5P.png)<br>
-    ![](https://i.imgur.com/T5LUT8P.png)
+    ![](https://i.imgur.com/T5LUT8P.png)<br>
     <br>
     -----------------**Input `http://prometheus:9090`**-------------------
     ![](https://i.imgur.com/MRaK0GO.png)
@@ -39,3 +39,41 @@ This project integrates Prometheus and Grafana to monitor the Kafka status.
     ```
     docker-compose down -v
     ```
+
+### Zookeeper
+* 4lw tool (need to install `nc` first)
+    refer: https://blog.csdn.net/u013673976/article/details/47279707
+<br>
+
+* zkCli tool
+    1. enter a zookeeper container
+    2. execute zkCli
+        ```
+        ./bin/zkCli.sh
+        ```
+    3. example
+        * check brokers
+            ```
+            ls /brokers/ids
+            ```
+        * check topics
+            ```
+            ls /brokers/topics
+            ```
+
+### Kafka
+* kafka built-in producer & consumer
+    1. enter a kafka container
+    2. move to bin folder
+        ```
+        cd /opt/kafka/bin/
+        ```
+    3. execute a producer
+        ```
+        ./kafka-console-producer.sh --broker-list kafka1:9093 kafka2:9093 kafka3:9093 --topic test
+        ```
+    4. open another terminal and repeate the step 1&2 to execute a consumer
+        ```
+        ./kafka-console-consumer.sh --bootstrap-server kafka1:9093 kafka2:9093 kafka3:9093 --topic test --from-beginning
+        ```
+    5. key in the data in the producer terminal
