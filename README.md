@@ -4,7 +4,6 @@
 This project integrates Prometheus and Grafana to monitor the Kafka status.
 
 ### Usage
-##### Start services
 1. Execute start.sh or docker-compose up
     ```
     ./start.sh
