@@ -13,16 +13,16 @@ This project integrates Prometheus and Grafana to monitor the Kafka status.
     ```
 <br>
 
-2. Access Prometheus through port 9090
+2. Access Prometheus through port 9090<br>
     ![](https://i.imgur.com/phnWNBw.png)
 <br>
 
-3. Access Grafana through port 3000 with initial username=admin, password=admin
+3. Access Grafana through port 3000 with initial username=admin, password=admin<br>
     ![](https://i.imgur.com/zC87dT6.png)
 <br>
 
-4. Add the data source "Prometheus" to Grafana
-    ![](https://i.imgur.com/SDxzD5P.png)
+4. Add the data source "Prometheus" to Grafana<br>
+    ![](https://i.imgur.com/SDxzD5P.png)<br>
     ![](https://i.imgur.com/T5LUT8P.png)
     <br>
     -----------------**Input `http://prometheus:9090`**-------------------
