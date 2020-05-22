@@ -1,7 +1,10 @@
 #!/bin/bash
 
-docker-compose build --no-cache && docker-compose up --force-recreate -d
-sleep 3
+set -e
+
+docker-compose build --no-cache
+docker-compose --compatibility up --force-recreate -d
+sleep 5
 echo 'zoo1 : '
 echo mntr | nc localhost 2181
 echo 'zoo2 : '
