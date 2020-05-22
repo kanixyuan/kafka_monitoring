@@ -140,8 +140,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: 800M
+          cpus: '0.3'
+          memory: 100M
     ports:
       - 8080:8080
     volumes:
@@ -149,7 +149,7 @@ services:
       - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
+      # - /dev/disk/:/dev/disk:ro
     depends_on:
       - kafka3
 
