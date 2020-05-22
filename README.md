@@ -4,12 +4,9 @@
 This project integrates Prometheus and Grafana to monitor the Kafka status.
 
 ### Usage
-1. Execute start.sh or docker-compose up
+1. Execute start.sh
     ```
     ./start.sh
-    ```
-    ```
-    docker-compose up --build -d
     ```
 <br>
 
@@ -21,26 +18,14 @@ This project integrates Prometheus and Grafana to monitor the Kafka status.
     ![](https://i.imgur.com/zC87dT6.png)
 <br>
 
-4. Add the data source "Prometheus" to Grafana<br>
-    ![](https://i.imgur.com/SDxzD5P.png)<br>
-    ![](https://i.imgur.com/T5LUT8P.png)<br>
-    <br>
-    -----------------**Input `http://prometheus:9090`**-------------------
-    ![](https://i.imgur.com/MRaK0GO.png)
-<br>
-
-5. Import your dashboard manually
-<br>
-
-6. Shut down the services
+4. Shut down the services
     ```
     ./stop.sh
     ```
-    ```
-    docker-compose down -v
-    ```
 
 ### Zookeeper
+* Zookeeper settings
+    * Limit the resources usage with (cpu=0.3, memory=200M / per zookeeper)
 * 4lw tool (need to install `nc` first)
     refer: https://blog.csdn.net/u013673976/article/details/47279707
 <br>
@@ -62,6 +47,16 @@ This project integrates Prometheus and Grafana to monitor the Kafka status.
             ```
 
 ### Kafka
+* Kafka settings
+    * Users can create topics initially by 'kafka3' in the docker compose file.
+    * There are three topics by default
+        * js.eval.requests：10 partitions, 1 replica
+        * tb.rule-engine：3 partitions, 3 replicas
+        * tb.transport.api.requests：3 partitions, 3 replicas
+    * Decrease the default partition and replica number for topic '__consumer_offsets' to 10 partitions, 3 replicas
+    * Limit the resources usage with (cpu=0.5, memory=1G / per broker)
+<br>
+
 * kafka built-in producer & consumer
     1. enter a kafka container
     2. move to bin folder
@@ -70,10 +65,14 @@ This project integrates Prometheus and Grafana to monitor the Kafka status.
         ```
     3. execute a producer
         ```
-        ./kafka-console-producer.sh --broker-list kafka1:9093 kafka2:9093 kafka3:9093 --topic test
+        ./kafka-console-producer.sh --broker-list kafka1:9093 kafka2:9093 kafka3:9093 --topic [topic_name]
         ```
     4. open another terminal and repeate the step 1&2 to execute a consumer
         ```
-        ./kafka-console-consumer.sh --bootstrap-server kafka1:9093 kafka2:9093 kafka3:9093 --topic test --from-beginning
+        ./kafka-console-consumer.sh --bootstrap-server kafka1:9093 kafka2:9093 kafka3:9093 --topic [topic_name] --from-beginning --group [group_name]
         ```
     5. key in the data in the producer terminal
+
+### Grafana
+* Include a built-in dashboard for Kafka
+    ![](https://i.imgur.com/VsP2zmZ.png)

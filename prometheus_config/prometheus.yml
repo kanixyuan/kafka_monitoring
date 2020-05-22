@@ -20,5 +20,19 @@ scrape_configs:
     static_configs:
       - targets:
         - "kafka1:9999"
+        labels:
+          broker: 'kafka1'
+      - targets:
         - "kafka2:9999"
+        labels:
+          broker: 'kafka2'
+      - targets:
         - "kafka3:9999"
+        labels:
+          broker: 'kafka3'
+
+  - job_name: "cadvisor"
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+        - cadvisor:8080
