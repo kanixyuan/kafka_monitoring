@@ -145,6 +145,8 @@ services:
           memory: 100M
     ports:
       - 8080:8080
+    command:
+      - "apk add --update findutils && rm -rf /var/cache/apk/*"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
