@@ -76,3 +76,8 @@ This project integrates Prometheus and Grafana to monitor the Kafka status.
 ### Grafana
 * Include a built-in dashboard for Kafka
     ![](https://i.imgur.com/VsP2zmZ.png)
+<br>
+
+* Refer
+    * https://ops.tips/blog/initialize-grafana-with-preconfigured-dashboards/
+    * https://github.com/cirocosta/sample-grafana

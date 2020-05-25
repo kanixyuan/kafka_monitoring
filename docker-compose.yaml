@@ -9,7 +9,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.3'
+          cpus: "0.3"
           memory: 200M
     ports:
       - 2181:2181
@@ -30,7 +30,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.3'
+          cpus: "0.3"
           memory: 200M
     ports:
       - 2182:2181
@@ -51,7 +51,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.3'
+          cpus: "0.3"
           memory: 200M
     ports:
       - 2183:2181
@@ -72,11 +72,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 1000M
     ports:
-      - 9100:9092
-      - 9101:9093
+      - 9200:9092
+      - 9201:9093
       - 9999
     env_file:
       - kafka_config/kafka.env
@@ -95,11 +95,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 1000M
     ports:
-      - 9102:9092
-      - 9103:9093
+      - 9202:9092
+      - 9203:9093
       - 9999
     env_file:
       - kafka_config/kafka.env
@@ -116,11 +116,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 1000M
     ports:
-      - 9104:9092
-      - 9105:9093
+      - 9204:9092
+      - 9205:9093
       - 9999
     env_file:
       - kafka_config/kafka.env
@@ -135,6 +135,7 @@ services:
 
   cadvisor:
     image: google/cadvisor
+    restart: unless-stopped
     container_name: cadvisor
     hostname: cadvisor
     deploy:
@@ -149,7 +150,9 @@ services:
       - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
+      - /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
       # - /dev/disk/:/dev/disk:ro
+    privileged: true
     depends_on:
       - kafka3
 
@@ -160,7 +163,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'
+          cpus: "0.2"
           memory: 300M
     ports:
       - 9090:9090
@@ -180,12 +183,15 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'
+          cpus: "0.2"
           memory: 100M
     ports:
       - 3000:3000
     environment:
       TZ: Asia/Taipei
+      # GF_SECURITY_ADMIN_USER: ${ADMIN_USER:-admin}
+      # GF_SECURITY_ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin}
+      # GF_USERS_ALLOW_SIGN_UP: 'false'
     # volumes:
     #   - ./grafana_config/provisioning:/etc/grafana/provisioning
     #   - ./grafana_config/config.ini:/etc/grafana/config.ini

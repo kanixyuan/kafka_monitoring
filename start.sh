@@ -2,7 +2,7 @@
 
 set -e
 
-docker-compose build --no-cache
+docker-compose build --no-cache grafana
 docker-compose --compatibility up --force-recreate -d
 sleep 5
 echo 'zoo1 : '

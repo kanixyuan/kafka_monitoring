@@ -36,3 +36,8 @@ scrape_configs:
     static_configs:
       - targets:
         - cadvisor:8080
+
+  - job_name: "resources-usage"
+    static_configs:
+      - targets:
+        - "172.17.0.1:9323"
