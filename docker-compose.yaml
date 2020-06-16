@@ -72,8 +72,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: 1000M
+          cpus: "0.6"
+          memory: 2000M
     ports:
       - 9200:9092
       - 9201:9093
@@ -95,8 +95,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: 1000M
+          cpus: "0.6"
+          memory: 2000M
     ports:
       - 9202:9092
       - 9203:9093
@@ -116,8 +116,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: 1000M
+          cpus: "0.6"
+          memory: 2000M
     ports:
       - 9204:9092
       - 9205:9093
@@ -155,8 +155,8 @@ services:
       - /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
       # - /dev/disk/:/dev/disk:ro
     privileged: true
-    depends_on:
-      - kafka3
+    # depends_on:
+    #   - kafka3
 
   prometheus:
     image: prom/prometheus
@@ -166,7 +166,7 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: 300M
+          memory: 200M
     ports:
       - 9090:9090
     volumes:
@@ -175,8 +175,8 @@ services:
     #     - '--config.file=/etc/prometheus/prom_config.yml'
     environment:
       TZ: UTC-8
-    depends_on:
-      - kafka3
+    # depends_on:
+    #   - kafka3
 
   grafana:
     build: ./grafana_config
@@ -186,7 +186,7 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: 100M
+          memory: 200M
     ports:
       - 3000:3000
     environment:
@@ -198,5 +198,5 @@ services:
     #   - ./grafana_config/provisioning:/etc/grafana/provisioning
     #   - ./grafana_config/config.ini:/etc/grafana/config.ini
     #   - ./grafana_config/dashboards:/var/lib/grafana/dashboards
-    depends_on:
-      - prometheus
+    # depends_on:
+    #   - prometheus
