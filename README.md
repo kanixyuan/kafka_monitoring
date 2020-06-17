@@ -72,6 +72,32 @@ This project integrates Prometheus and Grafana to monitor the Kafka status.
         ./kafka-console-consumer.sh --bootstrap-server kafka1:9093 kafka2:9093 kafka3:9093 --topic [topic_name] --from-beginning --group [group_name]
         ```
     5. key in the data in the producer terminal
+<br>
+
+* kafka built-in performence test
+    * producer test
+        ```
+        ./kafka-producer-perf-test.sh \
+        --topic js.eval.requests \
+        --num-records 300000 \
+        --record-size 100000 \
+        --throughput 1000 \
+        --producer-props bootstrap.servers=kafka2:9093,kafka1:9093,kafka3:9093 \
+        --print-metrics
+        ```
+    * consumer test
+        ```
+        ./kafka-consumer-perf-test.sh \
+        --broker-list kafka3:9093 kafka1:9093 kafka2:9093 \
+        --group perf-test-con-g \
+        --messages 50000000 \
+        --num-fetch-threads 1 \
+        --threads 1 \
+        --topic js.eval.requests \
+        --print-metrics \
+        --show-detailed-stats \
+        --reporting-interval 1000
+        ```
 
 ### Grafana
 * Include a built-in dashboard for Kafka
