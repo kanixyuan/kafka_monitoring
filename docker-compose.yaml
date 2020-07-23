@@ -135,7 +135,7 @@ services:
 
   cadvisor:
     image: google/cadvisor
-    restart: unless-stopped
+    restart: always
     container_name: cadvisor
     hostname: cadvisor
     deploy:
@@ -160,6 +160,7 @@ services:
 
   prometheus:
     image: prom/prometheus
+    restart: always
     container_name: prometheus
     hostname: prometheus
     deploy:
@@ -180,6 +181,7 @@ services:
 
   grafana:
     build: ./grafana_config
+    restart: always
     container_name: grafana
     hostname: grafana
     deploy:
