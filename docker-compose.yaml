@@ -141,7 +141,7 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.3'
+          cpus: "0.3"
           memory: 100M
     ports:
       - 8080:8080
@@ -172,12 +172,11 @@ services:
       - 9090:9090
     volumes:
       - ./prometheus_config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus_config/rules/:/etc/prometheus/rules/
     # command:
     #     - '--config.file=/etc/prometheus/prom_config.yml'
     environment:
       TZ: UTC-8
-    # depends_on:
-    #   - kafka3
 
   grafana:
     build: ./grafana_config
@@ -196,9 +195,3 @@ services:
       # GF_SECURITY_ADMIN_USER: ${ADMIN_USER:-admin}
       # GF_SECURITY_ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin}
       # GF_USERS_ALLOW_SIGN_UP: 'false'
-    # volumes:
-    #   - ./grafana_config/provisioning:/etc/grafana/provisioning
-    #   - ./grafana_config/config.ini:/etc/grafana/config.ini
-    #   - ./grafana_config/dashboards:/var/lib/grafana/dashboards
-    # depends_on:
-    #   - prometheus

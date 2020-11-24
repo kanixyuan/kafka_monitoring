@@ -1,0 +1,6 @@
+groups:
+- name: kafkaStatus
+  rules:
+    - alert: kafkaMemory
+      expr: sum without(area)(container_memory_working_set_bytes{container_label_com_docker_compose_service="kafka1"}) > 900000000
+      for: 30s
